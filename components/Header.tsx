@@ -1,7 +1,32 @@
-import React from 'react'
+"use client"
 
-export default function Header() {
-  return (
-    <div>Header</div>
-  )
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+
+
+function Header() {
+  const {user} = useUser();
+
+   return (
+    <div className="flex items-center justify-between p-5">
+      {user && (
+        <h1 className="text-2xl">
+          {user?.firstName}
+          {`'s`} space
+        </h1>
+      )}
+
+      {/* Breakcrumbs => like url of the function or component*/}
+
+      <div>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div> 
+    </div>
+  ) 
 }
+
+export default Header
