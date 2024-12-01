@@ -22,11 +22,11 @@ export async function createNewDocument(){
 
     await adminDb
     .collection("users")
-    .doc(sessionClaims?.email!)
+    .doc(sessionClaims?.email)
     .collection("rooms")
     .doc(docRef.id)
     .set({
-        userId:sessionClaims?.email!,
+        userId:sessionClaims?.email,
         role:"owner",
         createAt:new Date(),
         roomId:docRef.id,
