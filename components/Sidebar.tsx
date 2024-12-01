@@ -13,8 +13,19 @@ import { MenuIcon } from 'lucide-react'
   
 
 function Sidebar() {
+    const menuOption =(
+        <>
+        <NewDocumentButton />
+        {/**My document */}
+        {/**List.. */}
+
+        {/**shared with me */}
+        {/**List..  */}
+        </>
+    )
   return (
     <div className='p-2 md:p-5 bg-gray-200 relative'>
+        <div className='md:hidden'>
         <Sheet>
           <SheetTrigger>
             <MenuIcon className='p-2 hover:opacity-30 rounded-lg' size={40} />
@@ -23,15 +34,16 @@ function Sidebar() {
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
               <div>
-                {/*options */}
+                {menuOption}
               </div>
             </SheetHeader>
           </SheetContent>
         </Sheet>
+        </div>
 
 
         <div className='hidden md:inline'>
-        <NewDocumentButton />
+        {menuOption}
         </div>
     </div>
   )
