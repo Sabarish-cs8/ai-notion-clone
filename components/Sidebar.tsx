@@ -92,7 +92,7 @@ function Sidebar() {
           </h2>
           {groupedData.owner.map((doc)=>(
            // <p>{doc.roomId}</p>
-            <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
+           <SidebarOption key={doc.id} id={doc.id} href={`/doc/${doc.id}`} />
           ))}
           </>
         )}
