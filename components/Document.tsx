@@ -6,6 +6,7 @@ import { Input } from "./ui/input";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import Editor from "./Editor";
 //import useOwner from "@/lib/useOwner";
 
 
@@ -45,6 +46,9 @@ function Document({id}:{id:string}) {
         <div>
 
         </div>
+        <hr className="pb-10" />
+
+        <Editor />
     </div>
   )
 }
