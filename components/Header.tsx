@@ -1,6 +1,7 @@
 "use client"
 
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import Breadcrumbs from "./Breadcrumbs";
 
 
 function Header() {
@@ -16,6 +17,8 @@ function Header() {
       )}
 
       {/* Breakcrumbs => like url of the function or component*/}
+
+      <Breadcrumbs />
 
       <div>
         <SignedOut>
