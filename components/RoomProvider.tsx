@@ -8,7 +8,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import LiveCursorProvider from "./LiveCursorProvider";
 function RoomProvider({roomId , children }:{
     roomId:string;
-    children:React.ReactNode
+    children:React.ReactNode;
 }) {
   return (
     <RoomProviderWrapper
