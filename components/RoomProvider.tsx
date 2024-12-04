@@ -14,7 +14,7 @@ function RoomProvider({roomId , children }:{
     <RoomProviderWrapper
       id={roomId}
       initialPresence={{
-        cursor:null
+        cursor:null,
       }}
     >
         <ClientSideSuspense fallback={<LoadingSpinner />}>
