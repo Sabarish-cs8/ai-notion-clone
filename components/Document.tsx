@@ -6,13 +6,14 @@ import { Input } from "./ui/input";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+//import useOwner from "@/lib/useOwner";
 
 
 function Document({id}:{id:string}) {
     const[data,loading,error]=useDocumentData(doc(db,"documents",id));
     const [input,setInput]=useState("");
     const [isUpdating,startTransition]=useTransition();
-    const isowner =useOwner();
+   // const isowner =useOwner();
 
     useEffect(()=> {
         if(data){
