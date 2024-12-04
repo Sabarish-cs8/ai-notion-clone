@@ -1,8 +1,8 @@
-import React from 'react'
-
-function layout() {
+import LiveBlocksProvider from "@/components/LiveBlocksProvider"
+import { Children } from "react"
+function layout({children }:{children: React.ReactNode}) {
   return (
-    <div>layout</div>
+    <LiveBlocksProvider>{children}</LiveBlocksProvider>
   )
 }
 
