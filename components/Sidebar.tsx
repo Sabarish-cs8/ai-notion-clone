@@ -83,7 +83,7 @@ function Sidebar() {
         {/**My document */}
         {groupedData.owner.length === 0 ? (
           <h2 className='text-gray-500 font-semibold text-sm'>
-            My Documents found
+            No Documents found
           </h2>
         ):(
           <>
@@ -96,14 +96,14 @@ function Sidebar() {
           ))}
           </>
         )}
-        </div>
+        
         {/**List.. */}
 
         {/**shared with me */}
         {groupedData.editor.length > 0 && (
           <>
           <h2 className='text-gray-500 font-semibold text-sm'>
-            My Documents
+            Shared with me
           </h2>
           {groupedData.editor.map((doc)=>(
            // <p>{doc.roomId}</p>
@@ -113,6 +113,7 @@ function Sidebar() {
           
         )}
         {/**List..  */}
+        </div>
         </>
     )
   return (

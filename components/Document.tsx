@@ -9,6 +9,7 @@ import { db } from "@/firebase";
 import Editor from "./Editor";
 import useOwner from "@/lib/useOwner";
 import DeleteDocument from "./DeleteDocument";
+import InviteUser from "./InviteUser";
 
 
 function Document({id}:{id:string}) {
@@ -48,7 +49,7 @@ function Document({id}:{id:string}) {
                 {isOwner && (
                     <>
                     {/**Invite User */}
-
+                    <InviteUser />
                     {/**DeleteDocuments */}
                     <DeleteDocument />
                     </>

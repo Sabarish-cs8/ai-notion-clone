@@ -70,3 +70,29 @@ export  async function deleteDocument(roomId:string){
         return {success:false};
     }
 }
+
+export async function inviteUserToDocument(roomId:string , email:string){
+    auth().protect()// Ensure the user is authenticated
+
+    console.log("inviteUserToDocument",roomId,email);
+
+    try{
+        await adminDb
+        .collection("users")
+        .doc(email)
+        .collection("rooms")
+        .doc(roomId)
+        .set({
+            userId:email,
+            role:"editor",
+            createAt:new Date(),
+            roomId,
+        });
+
+        return {success:true};
+    }catch (error){
+        console.error(error);
+        return {success:false}
+    }
+
+}
