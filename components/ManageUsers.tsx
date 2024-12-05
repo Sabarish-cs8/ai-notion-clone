@@ -8,12 +8,10 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { FormEvent, useState, useTransition } from "react";
+import {  useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
-import { inviteUserToDocument } from "@/actions/actions";
+import {removeUserFromDocument } from "@/actions/actions";
 import {toast} from "sonner";
-import { Input } from "./ui/input";
 import useOwner from "@/lib/useOwner";
 import { useRoom } from "@liveblocks/react/suspense";
 import { useUser } from "@clerk/nextjs";
@@ -34,31 +32,25 @@ function ManageUsers() {
         user && query(collectionGroup(db,"rooms"), where("roomId","==",room.id))
     )
 
-    const handleInvite = async (e:FormEvent)=>{
-        e.preventDefault();
+    const handleDelete = (userId:string)=>{
+        startTransition (async () =>{
+            if(!user) return;
 
-        const roomId = pathname.split("/").pop();
-        if(!roomId) return;
-              
-
-        startTransition(async ()=>{
-            const { success } = await inviteUserToDocument(roomId , email);
+            const {success} = await removeUserFromDocument(room.id , userId);
 
             if(success){
-                setIsOpen(false);
-                setEmail("");
-                toast.success("User Added to Room successfully!");
+                toast.success("User removed from room successfully!")
             }else{
-                toast.error("Failed to add user to room!");
+                toast.error("Failed to remove user from room!");
+
             }
         })
-
-    }
+    };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <Button asChild variant="outline">
-             <DialogTrigger>Users</DialogTrigger>
+             <DialogTrigger>Users ({usersInRoom?.docs.length})</DialogTrigger>
         </Button>
   <DialogContent>
     <DialogHeader>
@@ -70,8 +62,38 @@ function ManageUsers() {
 
     <hr className="my-2" />
 
-    <div>
+    <div className="flex flex-col space-y-2">
         {/** UsersInRoom... */}
+        {usersInRoom?.docs.map((doc)=>(
+            <div
+            key={doc.data().userId}
+            className="flex items-center justify-between" 
+            >
+                <p className="font-light">
+                    {doc.data().userId === user?.emailAddresses[0].toString()
+                    ? `You (${doc.data().userId})`
+                : doc.data().userId }
+                </p>
+                <div className="flex items-center gap-2">
+                    <Button variant="outline">
+                        {doc.data().role}
+                    </Button>
+                    {isOwner && 
+                      doc.data().userId !== user?.emailAddresses[0].toString() && (
+                        <Button 
+                        variant="destructive"
+                        onClick={()=>handleDelete(doc.data().userId)}
+                        disabled={isPending}
+                        size="sm"
+                        >
+                            {isPending ? "Removing..." : "X"}
+                        </Button>
+                      )
+                    }
+
+                </div>
+            </div>
+        ))}
     </div>
    
   </DialogContent>
