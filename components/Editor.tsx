@@ -9,8 +9,10 @@ import {BlockNoteView} from "@blocknote/shadcn";
 import {BlockNoteEditor} from "@blocknote/core";
 import {useCreateBlockNote} from "@blocknote/react"
 
-import "@blocknote/shadcn/inter.css"
+import "@blocknote/core/fonts/inter.css"
 import "@blocknote/shadcn/style.css"
+import stringToColor from '@/lib/stringToColor';
+import { useSelf } from '@liveblocks/react';
 
 
 type EditorProps ={
@@ -19,8 +21,20 @@ type EditorProps ={
     darkMode:boolean;
 }
 function BlockNote({doc,provider,darkMode}:EditorProps){
+    const userInfo = useSelf ((me)=> me.info);
+
+    const editor : BlockNoteEditor = useCreateBlockNote({
+        collaboration:{
+            provider,
+            fragment:doc.getXmlFragment("document-store"),
+            user:{
+                name:userInfo?.name,
+                color:stringToColor(userInfo?.email),
+            }
+        }
+    })
     return(
-        <div>
+        <div className='relative max-w-6xl mx-auto'>
             <BlockNoteView 
             className='min-h-screen'
             editor={editor}
@@ -54,7 +68,7 @@ function Editor() {
         return null;
     }
 
-    const style = `hover:text-white ${
+    const style = `hover:text-white ${      
         darkMode 
         ? "text-gray-300 bg-gray-700 hover:bg-gray-100 hover:text-gray-700" 
         : "text-gray-700 bg-gray-200 hover:bg-gray-300 hover:text-gray-700"
@@ -74,7 +88,7 @@ function Editor() {
 
         {/**BlockNote */}
 
-        <BlockNote doc={doc}/>
+        <BlockNote doc={doc} provider={provider} darkMode={darkMode} />
     </div>
   )
 }
