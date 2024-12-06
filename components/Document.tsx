@@ -20,6 +20,8 @@ function Document({id}:{id:string}) {
     const [isUpdating,startTransition]=useTransition();
    const isOwner =useOwner();
 
+   console.log(loading)
+   console.log(error)
     useEffect(()=> {
         if(data){
             setInput(data.title);

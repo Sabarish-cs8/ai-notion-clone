@@ -73,6 +73,7 @@ function TranslateDocument({doc }: {doc :Y.Doc }) {
                     }),
                 }
             );
+            console.log(setQuestion)
             if(res.ok){
                 const {translated_text} = await res.json();
 

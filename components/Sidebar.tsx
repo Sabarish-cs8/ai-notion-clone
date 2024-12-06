@@ -42,6 +42,9 @@ function Sidebar() {
       where("userId","==",user.emailAddresses[0].toString())
       )
   );
+
+  console.log(loading)
+  console.log(error)
   useEffect(()=>{
     if(!data) return;
 

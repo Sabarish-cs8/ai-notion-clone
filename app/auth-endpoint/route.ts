@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { adminDb } from "@/firebase-admin";
 import liveblocks from "@/lib/liveblocks";
 import { auth } from "@clerk/nextjs/server";
