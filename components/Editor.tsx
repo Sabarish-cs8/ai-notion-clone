@@ -14,6 +14,7 @@ import "@blocknote/shadcn/style.css"
 import stringToColor from '@/lib/stringToColor';
 import { useSelf } from '@liveblocks/react';
 import TranslateDocument from './TranslateDocument';
+import ChatToDocument from './ChatToDocument';
 
 
 type EditorProps ={
@@ -81,6 +82,8 @@ function Editor() {
 
             <TranslateDocument doc={doc} />
             {/** chatTodocument AI*/}
+            
+             <ChatToDocument doc={doc} />
 
             {/**Dark Mode */}
 

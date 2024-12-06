@@ -60,6 +60,7 @@ function InviteUser() {
         type="email"
         placeholder="Email"
         className="w-full"
+        value={email}
         onChange={(e)=>setEmail(e.target.value)}
         />
         <Button type="submit" disabled={!email || isPending}>
