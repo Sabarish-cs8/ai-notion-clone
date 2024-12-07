@@ -21,6 +21,10 @@ export async function createNewDocument(){
         title:"New Doc"
     })
 
+    if (!sessionClaims?.email) {
+        throw new Error("Session email is undefined");
+      }
+
     await adminDb
     .collection("users")
     .doc(sessionClaims?.email)

@@ -26,6 +26,10 @@ type EditorProps ={
 function BlockNote({doc,provider,darkMode}:EditorProps){
     const userInfo = useSelf ((me)=> me.info);
 
+    if (!userInfo?.name) {
+        throw new Error("User name is undefined");
+      }
+      
     const editor : BlockNoteEditor = useCreateBlockNote({
         collaboration:{
             provider,
@@ -35,6 +39,7 @@ function BlockNote({doc,provider,darkMode}:EditorProps){
                 color:stringToColor(userInfo?.email),
             }
         }
+        
     })
     return(
         <div className='relative max-w-6xl mx-auto'>
